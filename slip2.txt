@@ -1,0 +1,62 @@
+1] 
+import java.util.ArrayList; 
+import java.util.Scanner; 
+ 
+public class imp1 { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+        ArrayList<Integer> numbers = new ArrayList<>(); 
+        System.out.print("Enter how many numbers you want to store: "); 
+        int n = sc.nextInt(); 
+        System.out.println("Enter " + n + " integers:"); 
+        for (int i = 0; i < n; i++) { 
+            int num = sc.nextInt(); 
+            numbers.add(num); 
+        } 
+        System.out.println("Elements in the ArrayList:"); 
+        for (int num : numbers) { 
+            System.out.print(num + " "); 
+    } 
+ sc.close(); 
+    } 
+} 
+
+
+
+
+ 
+2] 
+import java.util.Scanner; 
+class InvalidNameException extends Exception 
+{ 
+    public InvalidNameException(String message) 
+    { 
+        super(message); 
+    } 
+} 
+ 
+public class a3b2 
+{ 
+    static void validName(String name) throws InvalidNameException 
+    { 
+        if(!name.matches("[a-zA-Z ]+")) 
+        { 
+            throw new InvalidNameException("Name is Invalid!"); 
+        } 
+    } 
+     public static void main(String args[]) 
+    { 
+        Scanner sc=new Scanner(System.in); 
+        System.out.print("Enter Doctor Name:"); 
+        String d_name=sc.nextLine(); 
+        try 
+        { 
+        validName(d_name); 
+        System.out.println("Doctor name is valid."); 
+        } 
+        catch(InvalidNameException e) 
+        { 
+        System.out.println(e.getMessage()); 
+        } 
+     } 
+  } 
