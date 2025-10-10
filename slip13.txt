@@ -1,0 +1,61 @@
+1] 
+import java.util.*; 
+ 
+public class imp14 { 
+    public static void main(String[] args) { 
+        // Create LinkedList 
+        LinkedList<String> fruits = new LinkedList<>(); 
+ 
+        // Add fruits 
+        fruits.add("Apple"); 
+        fruits.add("Banana"); 
+        fruits.add("Guava"); 
+        fruits.add("Orange"); 
+ 
+        // Display using Iterator 
+        System.out.println("Fruits in LinkedList:"); 
+        Iterator<String> itr = fruits.iterator(); 
+        while (itr.hasNext()) { 
+            System.out.println(itr.next()); 
+        } 
+    } 
+} 
+
+
+
+2] 
+// Define interface 
+interface Operation { 
+    double PI = 3.142; // constant 
+ 
+    double area(); 
+    double volume(); 
+} 
+ 
+// Circle class implementing Operation 
+class Circle implements Operation { 
+    double r; 
+ 
+    Circle(double r) { 
+        this.r = r; 
+    } 
+ 
+    // Area of circle = πr² 
+    public double area() { 
+        return PI * r * r; 
+    } 
+ 
+    // Treat volume as sphere with radius r => (4/3)πr³ 
+    public double volume() { 
+        return (4.0 / 3) * PI * r * r * r; 
+    } 
+} 
+ 
+// Main class 
+public class imp15 { 
+    public static void main(String[] args) { 
+        Circle c = new Circle(5); // radius = 5 
+        System.out.println("Area = " + c.area()); 
+        System.out.println("Volume = " + c.volume()); 
+    } 
+} 
