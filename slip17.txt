@@ -1,0 +1,81 @@
+1] 
+import java.io.*; 
+import java.util.*; 
+public class a1b1 
+{ 
+    private int n; 
+    a1b1() 
+    { 
+        this.n=0; 
+    } 
+    a1b1(int num) 
+    { 
+        this.n=num; 
+    } 
+ 
+    public void isNegative() 
+    { 
+        if(n < 0) 
+        { 
+        System.out.println("Number is Negative"); 
+        } 
+        else     
+        { 
+        System.out.println("Number is Positive"); 
+        } 
+    } 
+ 
+    public void isEven() 
+    { 
+        if(n %2==0) 
+        { 
+        System.out.println("Number is even"); 
+        } 
+        else 
+        { 
+        System.out.println("Number is odd"); 
+        } 
+    } 
+ 
+    public static void main(String[] args) 
+    { 
+        a1b1 n1=new a1b1(); 
+        int num=Integer.parseInt(args[0]); 
+        a1b1 n2=new a1b1(num); 
+        n2.isNegative(); 
+        n2.isEven(); 
+    } 
+} 
+
+
+
+
+2] 
+class Student { 
+    int rollno; 
+    String name; 
+    static int count = 0; // static variable to keep object count 
+ 
+    // Default constructor 
+    Student() { 
+        count++; 
+    } 
+ 
+    // Parameterized constructor 
+    Student(int rollno, String name) { 
+        this.rollno = rollno; 
+        this.name = name; 
+        count++; 
+        System.out.println("Object created: " + name + " (Roll No: " + rollno + ")"); 
+        System.out.println("Total objects = " + count); 
+        System.out.println(); 
+    } 
+} 
+ 
+public class imp18 { 
+    public static void main(String[] args) { 
+        Student s1 = new Student(1, "Amit"); 
+        Student s2 = new Student(2, "Sneha"); 
+        Student s3 = new Student(3, "Raj"); 
+    } 
+} 
