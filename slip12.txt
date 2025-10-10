@@ -1,0 +1,34 @@
+2] 
+ 
+abstract class Shape { 
+    abstract double area(); 
+    abstract double volume(); 
+} 
+ 
+public class imp13 { 
+    // Inner class Cylinder 
+    static class Cylinder extends Shape { 
+        double r, h; 
+ 
+        Cylinder(double r, double h) { 
+            this.r = r; 
+            this.h = h; 
+        } 
+ 
+        // Surface area = 2πr(h + r) 
+        double area() { 
+            return 2 * Math.PI * r * (h + r); 
+        } 
+ 
+        // Volume = πr²h 
+        double volume() { 
+            return Math.PI * r * r * h; 
+        } 
+    } 
+ 
+    public static void main(String[] args) { 
+        Cylinder c = new Cylinder(3, 5); // radius=3, height=5 
+        System.out.println("Area = " + c.area()); 
+        System.out.println("Volume = " + c.volume()); 
+    } 
+}
