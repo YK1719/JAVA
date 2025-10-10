@@ -1,0 +1,94 @@
+1] 
+import java.util.Scanner; 
+ 
+public class imp20 { 
+    public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+ 
+        System.out.print("Enter the number of elements: "); 
+        int n = sc.nextInt(); 
+ 
+        int[] arr = new int[n]; 
+ 
+        // Accept numbers from user 
+        System.out.println("Enter " + n + " numbers:"); 
+        for (int i = 0; i < n; i++) { 
+            arr[i] = sc.nextInt(); 
+        } 
+ 
+        // Find maximum number 
+        int max = arr[0]; 
+        for (int i = 1; i < n; i++) { 
+            if (arr[i] > max) { 
+                max = arr[i]; 
+            } 
+        } 
+ 
+        System.out.println("Maximum number is: " + max); 
+        sc.close(); 
+    } 
+} 
+
+
+
+
+
+2] 
+import java.util.Scanner; 
+ 
+// Abstract class 
+abstract class Order { 
+    int id; 
+    String description; 
+ 
+    // Abstract methods 
+    abstract void accept(); 
+    abstract void display(); 
+} 
+ 
+// Subclass 
+class PurchaseOrder extends Order { 
+    String customerName; 
+    Scanner sc = new Scanner(System.in); 
+ 
+    // Accept details from user 
+    void accept() { 
+        System.out.print("Enter Order ID: "); 
+        id = sc.nextInt(); 
+        sc.nextLine(); // consume newline 
+ 
+        System.out.print("Enter Description: "); 
+        description = sc.nextLine(); 
+ 
+        System.out.print("Enter Customer Name: "); 
+        customerName = sc.nextLine(); 
+    } 
+ 
+    // Display details 
+    void display() { 
+        System.out.println("Order ID: " + id); 
+        System.out.println("Description: " + description); 
+        System.out.println("Customer Name: " + customerName); 
+        System.out.println("---------------------------"); 
+    } 
+} 
+ 
+// Main class 
+public class imp21 { 
+    public static void main(String[] args) { 
+        PurchaseOrder[] orders = new PurchaseOrder[3]; 
+ 
+        // Create and accept details for 3 orders 
+        for (int i = 0; i < 3; i++) { 
+            System.out.println("Enter details for Order " + (i + 1) + ":"); 
+            orders[i] = new PurchaseOrder(); 
+            orders[i].accept(); 
+        } 
+ 
+        // Display all orders 
+        System.out.println("\nPurchase Order Details:"); 
+        for (int i = 0; i < 3; i++) { 
+            orders[i].display(); 
+        } 
+    } 
+} 
