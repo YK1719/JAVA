@@ -1,0 +1,88 @@
+1] 
+import java.util.Scanner; 
+Slip 5 
+class NumberIsZeroException extends Exception { 
+public NumberIsZeroException(String message) { 
+super(message); 
+} 
+} 
+public class imp5 { 
+    public static long factorial(int n) { 
+        long fact = 1; 
+        for (int i = 1; i <= n; i++) { 
+            fact *= i; 
+        } 
+        return fact; 
+    } 
+ public static void main(String[] args) { 
+        Scanner sc = new Scanner(System.in); 
+ try { 
+            System.out.print("Enter a number: "); 
+            int num = sc.nextInt(); 
+          if (num == 0) { 
+                throw new NumberIsZeroException("Number is 0"); 
+            } 
+            long result = factorial(num); 
+            System.out.println("Factorial of " + num + " = " + result); 
+  }  
+catch (NumberIsZeroException e) { 
+            System.out.println("Exception: " + e.getMessage()); 
+        } 
+ catch (Exception e) { 
+            System.out.println("Invalid input!"); 
+        } sc.close(); 
+    } 
+} 
+
+
+
+
+
+
+2] 
+class Point 
+{ 
+int x; 
+int y; 
+public Point(int x,int y) 
+{ 
+this.x=x; 
+this.y=y; 
+} 
+} 
+class ColorPoint extends Point 
+{ 
+String color; 
+public ColorPoint(int x,int y,String color) 
+{ 
+super(x,y); 
+this.color=color; 
+} 
+public void display() 
+{ 
+System.out.println("x: "+x+",y: "+y+",color: "+color); 
+} 
+} 
+class Point3D extends Point 
+{ 
+int z; 
+public Point3D(int x,int y,int z) 
+{ 
+super(x,y); 
+this.z=z; 
+} 
+public void display() 
+{ 
+System.out.println("x: "+x+",y: "+y+",z: "+z); 
+} 
+} 
+public class A2A1 
+{ 
+public static void main(String args[]) 
+{ 
+ColorPoint c1=new ColorPoint(5,6,"blue"); 
+c1.display(); 
+Point3D c2=new Point3D(5,6,7); 
+c2.display(); 
+} 
+}
