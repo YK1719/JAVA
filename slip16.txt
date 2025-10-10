@@ -1,0 +1,92 @@
+1] 
+import java.io.*; 
+import java.util.*; 
+public class a1b1 
+{ 
+    private int n; 
+    a1b1() 
+    { 
+        this.n=0; 
+    } 
+    a1b1(int num) 
+    { 
+        this.n=num; 
+    } 
+ 
+    public void isNegative() 
+    { 
+        if(n < 0) 
+        { 
+        System.out.println("Number is Negative"); 
+        } 
+        else     
+        { 
+        System.out.println("Number is Positive"); 
+        } 
+    } 
+ 
+    public void isEven() 
+    { 
+        if(n %2==0) 
+        { 
+        System.out.println("Number is even"); 
+        } 
+        else 
+        { 
+        System.out.println("Number is odd"); 
+        } 
+    } 
+ 
+    public static void main(String[] args) 
+    { 
+        a1b1 n1=new a1b1(); 
+        int num=Integer.parseInt(args[0]); 
+        a1b1 n2=new a1b1(num); 
+        n2.isNegative(); 
+        n2.isEven(); 
+    } 
+} 
+
+
+
+
+
+2] 
+// Super class 
+class Employee { 
+    String name; 
+    double salary; 
+ 
+    Employee(String name, double salary) { 
+        this.name = name; 
+        this.salary = salary; 
+    } 
+ 
+    void display() { 
+        System.out.println("Name: " + name); 
+        System.out.println("Salary: " + salary); 
+    } 
+} 
+ 
+// Subclass 
+class Developer extends Employee { 
+    String projectName; 
+ 
+    Developer(String name, double salary, String projectName) { 
+        super(name, salary);  // call Employee constructor 
+        this.projectName = projectName; 
+    } 
+ 
+    void display() { 
+        super.display();  // display Employee details 
+        System.out.println("Project Name: " + projectName); 
+    } 
+} 
+ 
+// Main class 
+public class imp17 { 
+    public static void main(String[] args) { 
+        Developer d = new Developer("Rahul", 55000, "AI Chatbot"); 
+        d.display(); 
+    } 
+} 
