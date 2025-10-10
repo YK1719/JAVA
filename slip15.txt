@@ -1,0 +1,59 @@
+1] 
+import java.util.*; 
+ 
+public class imp16 { 
+    public static void main(String[] args) { 
+        // Create LinkedList 
+        LinkedList<String> fruits = new LinkedList<>(); 
+ 
+        // Add fruits 
+        fruits.add("Apple"); 
+        fruits.add("Banana"); 
+        fruits.add("Guava"); 
+        fruits.add("Orange"); 
+ 
+        // Display in reverse using ListIterator 
+        System.out.println("Fruits in reverse order:"); 
+        ListIterator<String> itr = fruits.listIterator(fruits.size()); 
+        while (itr.hasPrevious()) { 
+            System.out.println(itr.previous()); 
+        } 
+    } 
+} 
+
+
+
+
+
+2] 
+// Super class 
+class Employee { 
+    String name; 
+    double salary; 
+ 
+    Employee(String name, double salary) { 
+  this.name = name; 
+        this.salary = salary; 
+    } 
+ void display() { 
+        System.out.println("Name: " + name); 
+        System.out.println("Salary: " + salary); 
+    } 
+} 
+class Developer extends Employee { 
+    String projectName; 
+  Developer(String name, double salary, String projectName) { 
+        super(name, salary);  // call Employee constructor 
+        this.projectName = projectName; 
+    } 
+   void display() { 
+        super.display();  // display Employee details 
+        System.out.println("Project Name: " + projectName); 
+    } 
+} 
+public class imp17 { 
+    public static void main(String[] args) { 
+        Developer d = new Developer("Rahul", 55000, "AI Chatbot"); 
+        d.display(); 
+    } 
+} 
