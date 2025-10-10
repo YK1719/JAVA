@@ -1,6 +1,5 @@
 1] 
 import java.util.Scanner; 
-Slip 5 
 class NumberIsZeroException extends Exception { 
 public NumberIsZeroException(String message) { 
 super(message); 
