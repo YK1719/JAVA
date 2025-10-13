@@ -1,0 +1,23 @@
+10]   Write a Python Programme to read the dataset (“Iris.csv”). dataset download from  
+and apply Apriori algorithm. 
+import numpy as np 
+import matplotlib.pyplot as plt 
+import pandas as pd 
+from apyori import apriori 
+data=pd.read_csv('Iris.csv',header=None) 
+data 
+data.head() 
+records=[] 
+for i in range(0,3): 
+records.append([str(data.values[i,j]) for j in range(0,3)]) 
+association_rules=apriori(records,min_support=0.0045,min_confidence=0.2,min_lift=3,min_length=2) 
+association_result=list(association_rules) 
+print(len(association_result)) 
+print(association_result) 
+for  item in association_result: 
+pair=item[0] 
+items=[x for x in pair] 
+print("Rule:"+items[0] + "->" + items[1]) 
+print("Support:"+str(item[1])) 
+print("Confidence:" +str(item[2][0][2])) 
+print("lift:"+str(item[2][0][3])) 
