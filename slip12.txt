@@ -1,34 +1,45 @@
-2] 
- 
-abstract class Shape { 
-    abstract double area(); 
-    abstract double volume(); 
-} 
- 
-public class imp13 { 
-    // Inner class Cylinder 
-    static class Cylinder extends Shape { 
-        double r, h; 
- 
-        Cylinder(double r, double h) { 
-            this.r = r; 
-            this.h = h; 
-        } 
- 
-        // Surface area = 2πr(h + r) 
-        double area() { 
-            return 2 * Math.PI * r * (h + r); 
-        } 
- 
-        // Volume = πr²h 
-        double volume() { 
-            return Math.PI * r * r * h; 
-        } 
-    } 
- 
-    public static void main(String[] args) { 
-        Cylinder c = new Cylinder(3, 5); // radius=3, height=5 
-        System.out.println("Area = " + c.area()); 
-        System.out.println("Volume = " + c.volume()); 
-    } 
-}
+# Create vectors for employee details
+empno <- c(101, 102, 103, 104, 105)
+empname <- c("Shekhar", "Sagar", "Dipak", "Priyanka", "Rahul")
+gender <- c("M", "M", "M", "F", "M")
+age <- c(25, 22, 21, 51, 28)
+designation <- c("Manager", "HR", "Analyst", "Team Lead", "Developer")
+
+# Create data frame
+employees <- data.frame(empno, empname, gender, age, designation)
+
+# Display employee details
+print(employees)
+
+
+
+
+
+
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn.metrics import mean_squared_error, r2_score
+
+# Load dataset
+data = pd.read_csv("cars.csv")  # replace with your path
+
+# Features and target
+X = data[['Weight', 'Volume']]  # example independent variables
+y = data['CO2']                 # target variable
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Build Multiple Linear Regression model
+model = LinearRegression()
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Print coefficients and performance
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+print("Mean Squared Error:", mean_squared_error(y_test, y_pred))
+print("R2 Score:", r2_score(y_test, y_pred))
