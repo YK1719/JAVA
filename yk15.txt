@@ -1,0 +1,29 @@
+15]  Write a Python program build Decision Tree Classifier for shows.csv from pandas and predict class label for show 
+starring a 40 years old American comedian, with 10 years of experience, and a comedy ranking of 7? Create a csv file 
+as shown in https://www.w3schools.com/python/python_ml_decision_tree.asp 
+import pandas as pd 
+from sklearn.preprocessing import LabelEncoder 
+from sklearn.model_selection import train_test_split 
+from sklearn.tree import DecisionTreeClassifier,plot_tree 
+from sklearn.metrics import accuracy_score 
+import matplotlib.pyplot as plt 
+df=pd.read_csv("shows.csv") 
+df 
+le=LabelEncoder() 
+for col in df: 
+df[col]=le.fit_transform(df[[col]]) 
+df 
+x=df.drop("Go",axis=1) 
+x 
+y=df["Go"] 
+y 
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.3,random_state=42) 
+x_train.shape,x_test.shape 
+destree=DecisionTreeClassifier(criterion='gini') 
+destree.fit(x_train,y_train) 
+y_pred=destree.predict(x_test) 
+y_pred 
+print('model accuracy score:',accuracy_score(y_test,y_pred)) 
+plt.figure(figsize=(8,8)) 
+from sklearn import tree 
+tree.plot_tree(destree.fit(x_train,y_train)) 
