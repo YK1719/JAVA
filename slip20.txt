@@ -1,82 +1,43 @@
-1] 
-import java.util.Arrays; 
- 
-public class imp22 { 
-    public static void main(String[] args) { 
-        if (args.length != 3) { 
-            System.out.println("Usage: java SortNumbers <num1> <num2> <num3>"); 
-            return; 
-        } 
- 
-        // Convert command line arguments to integers 
-        int[] numbers = new int[3]; 
-        for (int i = 0; i < 3; i++) { 
-            numbers[i] = Integer.parseInt(args[i]); 
-        } 
- 
-        // Sort the array 
-        Arrays.sort(numbers); 
- 
-        // Display sorted numbers 
-        System.out.println("Sorted numbers:"); 
-        for (int num : numbers) { 
-            System.out.print(num + " "); 
-        } 
-        System.out.println(); 
-    } 
-} 
+# Create vectors
+data<-data.frame(
+Rollno <- c(1, 2, 3, 4, 5)
+Studname <- c("Alice", "Bob", "Charlie", "David", "Eva")
+Address <- c("Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad")
+Marks <- c(85, 90, 78, 88, 92)
+)
+
+# Display the details
+print(data)
 
 
 
 
 
 
-2] 
-class Employee { 
-    int id; 
-    String name; 
-    String deptName; 
-    double salary; 
-    static int count = 0; // Static variable to keep track of objects 
- 
-    // Default constructor 
-    Employee() { 
-        id = 0; 
-        name = ""; 
-        deptName = ""; 
-        salary = 0.0; 
-        count++; 
-    } 
- 
-    // Parameterized constructor 
-    Employee(int id, String name, String deptName, double salary) { 
-        this.id = id; 
-        this.name = name; 
-        this.deptName = deptName; 
-        this.salary = salary; 
-        count++; // Increment object count 
-    } 
- 
-    // Method to display employee details 
-    void display() { 
-        System.out.println("ID: " + id); 
-        System.out.println("Name: " + name); 
-        System.out.println("Department: " + deptName); 
-        System.out.println("Salary: " + salary); 
-        System.out.println("----------------------"); 
-    } 
- 
-    // Method to display object count 
-    static void displayCount() { 
-        System.out.println("Total Employees created: " + count); 
-        System.out.println("======================"); 
-    } 
-} 
- 
-// Main class 
-public class imp23 { 
-    public static void main(String[] args) { 
-        // Creating Employee objects using parameterized constructor 
-        Employee e1 = new Employee(101, "Alice", "HR", 50000); 
-        e1.display(); 
-        Employee.displayCount();
+# Import necessary libraries
+import pandas as pd
+from sklearn.preprocessing import StandardScaler
+from scipy.cluster.hierarchy import dendrogram, linkage
+import matplotlib.pyplot as plt
+
+# Load dataset (replace the URL with your GitHub raw CSV link)
+url = "https://raw.githubusercontent.com/yourusername/repo/main/Customer.csv"
+data = pd.read_csv(url)
+
+# Select relevant features (for example, 'Age' and 'Income')
+X = data[['Age', 'Annual Income (k$)']]
+
+# Standardize features
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+
+# Perform Hierarchical Agglomerative Clustering
+linked = linkage(X_scaled, method='ward')
+
+# Plot dendrogram
+plt.figure(figsize=(10, 5))
+dendrogram(linked)
+plt.title('Hierarchical Clustering Dendrogram')
+plt.xlabel('Customers')
+plt.ylabel('Distance')
+plt.show()
