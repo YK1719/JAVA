@@ -1,87 +1,43 @@
-1] 
-import java.util.Scanner; 
-class NumberIsZeroException extends Exception { 
-public NumberIsZeroException(String message) { 
-super(message); 
-} 
-} 
-public class imp5 { 
-    public static long factorial(int n) { 
-        long fact = 1; 
-        for (int i = 1; i <= n; i++) { 
-            fact *= i; 
-        } 
-        return fact; 
-    } 
- public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
- try { 
-            System.out.print("Enter a number: "); 
-            int num = sc.nextInt(); 
-          if (num == 0) { 
-                throw new NumberIsZeroException("Number is 0"); 
-            } 
-            long result = factorial(num); 
-            System.out.println("Factorial of " + num + " = " + result); 
-  }  
-catch (NumberIsZeroException e) { 
-            System.out.println("Exception: " + e.getMessage()); 
-        } 
- catch (Exception e) { 
-            System.out.println("Invalid input!"); 
-        } sc.close(); 
-    } 
-} 
+# Define factors
+factor1 <- factor(c("A", "B", "C"))
+factor2 <- factor(c("Shekhar", "Sagar"))
+
+# Concatenate factors
+concate <- c(factor1, factor2)
+
+# Display levels
+cat(levels(concate))
 
 
 
 
 
 
-2] 
-class Point 
-{ 
-int x; 
-int y; 
-public Point(int x,int y) 
-{ 
-this.x=x; 
-this.y=y; 
-} 
-} 
-class ColorPoint extends Point 
-{ 
-String color; 
-public ColorPoint(int x,int y,String color) 
-{ 
-super(x,y); 
-this.color=color; 
-} 
-public void display() 
-{ 
-System.out.println("x: "+x+",y: "+y+",color: "+color); 
-} 
-} 
-class Point3D extends Point 
-{ 
-int z; 
-public Point3D(int x,int y,int z) 
-{ 
-super(x,y); 
-this.z=z; 
-} 
-public void display() 
-{ 
-System.out.println("x: "+x+",y: "+y+",z: "+z); 
-} 
-} 
-public class A2A1 
-{ 
-public static void main(String args[]) 
-{ 
-ColorPoint c1=new ColorPoint(5,6,"blue"); 
-c1.display(); 
-Point3D c2=new Point3D(5,6,7); 
-c2.display(); 
-} 
-}
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, plot_tree
+from sklearn.metrics import accuracy_score
+import matplotlib.pyplot as plt
+
+# Load dataset
+data = pd.read_csv("diabetes.csv")
+
+# Features and target
+X = data.drop("Outcome", axis=1)
+y = data["Outcome"]
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Decision Tree Classifier
+destree = DecisionTreeClassifier(criterion="entropy", random_state=42)
+destree.fit(X_train, y_train)
+
+# Predictions and accuracy
+y_pred = destree.predict(X_test)
+print("Model Accuracy:", accuracy_score(y_test, y_pred))
+
+# Plot the tree
+plt.figure(figsize=(8,8))
+plot_tree(destree, feature_names=X.columns, class_names=["No Diabetes","Diabetes"], filled=True)
+plt.show()
