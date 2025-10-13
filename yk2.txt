@@ -1,0 +1,23 @@
+2] Write a python program to implement k-means algorithms on a synthetic dataset. 
+import pandas as pd 
+import numpy as np 
+import matplotlib.pyplot as plt 
+from sklearn.datasets import make_blobs 
+from sklearn.cluster import KMeans 
+n_samples=200 
+n_features=2 
+n_clusters=3 
+n_samples 
+X,_=make_blobs(n_samples=n_samples,n_features=n_features,centers=n_clusters,random_state=42) 
+X 
+k=3 
+kmeans=KMeans(n_clusters=k) 
+kmeans.fit(X) 
+cluster_centers=kmeans.cluster_centers_ 
+labels=kmeans.labels_ 
+cluster_centers 
+plt.scatter(X[:,0],X[:,1],c=labels,cmap='viridis') 
+plt.scatter(cluster_centers[:,0],cluster_centers[:,1,], s=200,color='red',label='cluster centers') 
+plt.title('k-means clustering') 
+plt.legend() 
+plt.show() 
