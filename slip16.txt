@@ -1,92 +1,47 @@
-1] 
-import java.io.*; 
-import java.util.*; 
-public class a1b1 
-{ 
-    private int n; 
-    a1b1() 
-    { 
-        this.n=0; 
-    } 
-    a1b1(int num) 
-    { 
-        this.n=num; 
-    } 
- 
-    public void isNegative() 
-    { 
-        if(n < 0) 
-        { 
-        System.out.println("Number is Negative"); 
-        } 
-        else     
-        { 
-        System.out.println("Number is Positive"); 
-        } 
-    } 
- 
-    public void isEven() 
-    { 
-        if(n %2==0) 
-        { 
-        System.out.println("Number is even"); 
-        } 
-        else 
-        { 
-        System.out.println("Number is odd"); 
-        } 
-    } 
- 
-    public static void main(String[] args) 
-    { 
-        a1b1 n1=new a1b1(); 
-        int num=Integer.parseInt(args[0]); 
-        a1b1 n2=new a1b1(num); 
-        n2.isNegative(); 
-        n2.isEven(); 
-    } 
-} 
+# Data
+Year <- c(2001, 2002, 2003)
+Export <- c(26, 32, 35)
+Import <- c(35, 40, 50)
+
+# Combine into matrix
+data <- rbind(Export, Import)
+
+# Bar plot
+barplot(data,
+        beside = TRUE,
+        names.arg = Year,
+        col = c("skyblue", "orange"),
+        legend.text = c("Export", "Import"),
+        main = "Export vs Import")
 
 
 
 
 
-2] 
-// Super class 
-class Employee { 
-    String name; 
-    double salary; 
- 
-    Employee(String name, double salary) { 
-        this.name = name; 
-        this.salary = salary; 
-    } 
- 
-    void display() { 
-        System.out.println("Name: " + name); 
-        System.out.println("Salary: " + salary); 
-    } 
-} 
- 
-// Subclass 
-class Developer extends Employee { 
-    String projectName; 
- 
-    Developer(String name, double salary, String projectName) { 
-        super(name, salary);  // call Employee constructor 
-        this.projectName = projectName; 
-    } 
- 
-    void display() { 
-        super.display();  // display Employee details 
-        System.out.println("Project Name: " + projectName); 
-    } 
-} 
- 
-// Main class 
-public class imp17 { 
-    public static void main(String[] args) { 
-        Developer d = new Developer("Rahul", 55000, "AI Chatbot"); 
-        d.display(); 
-    } 
-} 
+
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import accuracy_score
+
+# Load dataset (download CSV from Kaggle and provide path)
+data = pd.read_csv('diabetes.csv')
+
+# Split features and target
+X = data.drop('Outcome', axis=1)
+y = data['Outcome']
+
+# Split into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create and train Decision Tree Classifier
+clf = DecisionTreeClassifier(random_state=42)
+clf.fit(X_train, y_train)
+
+# Make predictions
+y_pred = clf.predict(X_test)
+
+# Print accuracy
+print("Accuracy:", accuracy_score(y_test, y_pred))        
