@@ -1,62 +1,31 @@
-1] 
-import java.util.ArrayList; 
-import java.util.Scanner; 
- 
-public class imp1 { 
-    public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
-        ArrayList<Integer> numbers = new ArrayList<>(); 
-        System.out.print("Enter how many numbers you want to store: "); 
-        int n = sc.nextInt(); 
-        System.out.println("Enter " + n + " integers:"); 
-        for (int i = 0; i < n; i++) { 
-            int num = sc.nextInt(); 
-            numbers.add(num); 
-        } 
-        System.out.println("Elements in the ArrayList:"); 
-        for (int num : numbers) { 
-            System.out.print(num + " "); 
-    } 
- sc.close(); 
-    } 
-} 
+# Function to print multiplication table
+mul_table <- function(num) {
+  for(i in 1:10) {
+    cat(num, "x", i, "=", num * i, "\n")
+  }
+}
+
+# Example: Multiplication table of 5
+mul_table(5)
 
 
 
 
- 
-2] 
-import java.util.Scanner; 
-class InvalidNameException extends Exception 
-{ 
-    public InvalidNameException(String message) 
-    { 
-        super(message); 
-    } 
-} 
- 
-public class a3b2 
-{ 
-    static void validName(String name) throws InvalidNameException 
-    { 
-        if(!name.matches("[a-zA-Z ]+")) 
-        { 
-            throw new InvalidNameException("Name is Invalid!"); 
-        } 
-    } 
-     public static void main(String args[]) 
-    { 
-        Scanner sc=new Scanner(System.in); 
-        System.out.print("Enter Doctor Name:"); 
-        String d_name=sc.nextLine(); 
-        try 
-        { 
-        validName(d_name); 
-        System.out.println("Doctor name is valid."); 
-        } 
-        catch(InvalidNameException e) 
-        { 
-        System.out.println(e.getMessage()); 
-        } 
-     } 
-  } 
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.datasets import make_blobs
+from sklearn.cluster import KMeans
+
+# Create synthetic dataset
+X, _ = make_blobs(n_samples=200, centers=3, random_state=42)
+
+# Apply K-Means
+kmeans = KMeans(n_clusters=3, random_state=42)
+y_kmeans = kmeans.fit_predict(X)
+
+# Plot clusters
+plt.scatter(X[:,0], X[:,1], c=y_kmeans, cmap='viridis', s=50)
+plt.scatter(kmeans.cluster_centers_[:,0], kmeans.cluster_centers_[:,1], color='red', marker='X', s=200)
+plt.title("K-Means Clustering")
+plt.show()
