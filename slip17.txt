@@ -1,81 +1,55 @@
-1] 
-import java.io.*; 
-import java.util.*; 
-public class a1b1 
-{ 
-    private int n; 
-    a1b1() 
-    { 
-        this.n=0; 
-    } 
-    a1b1(int num) 
-    { 
-        this.n=num; 
-    } 
- 
-    public void isNegative() 
-    { 
-        if(n < 0) 
-        { 
-        System.out.println("Number is Negative"); 
-        } 
-        else     
-        { 
-        System.out.println("Number is Positive"); 
-        } 
-    } 
- 
-    public void isEven() 
-    { 
-        if(n %2==0) 
-        { 
-        System.out.println("Number is even"); 
-        } 
-        else 
-        { 
-        System.out.println("Number is odd"); 
-        } 
-    } 
- 
-    public static void main(String[] args) 
-    { 
-        a1b1 n1=new a1b1(); 
-        int num=Integer.parseInt(args[0]); 
-        a1b1 n2=new a1b1(num); 
-        n2.isNegative(); 
-        n2.isEven(); 
-    } 
-} 
+# Initialize the first two Fibonacci numbers
+fib <- numeric(20)
+fib[1] <- 0
+fib[2] <- 1
+
+# Generate the remaining Fibonacci numbers
+for (i in 3:20) {
+  fib[i] <- fib[i-1] + fib[i-2]
+}
+
+# Print the first 20 Fibonacci numbers
+print(fib)
 
 
 
 
-2] 
-class Student { 
-    int rollno; 
-    String name; 
-    static int count = 0; // static variable to keep object count 
- 
-    // Default constructor 
-    Student() { 
-        count++; 
-    } 
- 
-    // Parameterized constructor 
-    Student(int rollno, String name) { 
-        this.rollno = rollno; 
-        this.name = name; 
-        count++; 
-        System.out.println("Object created: " + name + " (Roll No: " + rollno + ")"); 
-        System.out.println("Total objects = " + count); 
-        System.out.println(); 
-    } 
-} 
- 
-public class imp18 { 
-    public static void main(String[] args) { 
-        Student s1 = new Student(1, "Amit"); 
-        Student s2 = new Student(2, "Sneha"); 
-        Student s3 = new Student(3, "Raj"); 
-    } 
-} 
+
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+# Create the DataFrame
+data = {
+    'Year': [2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,2017,
+             2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016,2016],
+    'Month': [12,11,10,9,8,7,6,5,4,3,2,1,12,11,10,9,8,7,6,5,4,3,2,1],
+    'Interest_Rate': [2.75,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.25,2.25,
+                      2.25,2.25,2.25,2.25,2.25,2.25,2.25,1.75,1.75,1.75,1.75,1.75],
+    'Unemployment_Rate': [5.3,5.3,5.3,5.3,5.4,5.6,5.5,5.5,5.5,5.5,5.0,6.5,
+                          7,5.9,6,5.8,6.1,6.2,6.1,6.1,6.1,5.9,6.2,6.2],
+    'Stock_Index_Price': [1464,1394,1357,1293,1256,1254,1234,1195,1159,1167,1130,1075,
+                          1047,965,943,958,971,949,884,866,876,822,704,719]
+}
+
+df = pd.DataFrame(data)
+
+# Define features and target
+X = df[['Year','Month','Interest_Rate','Unemployment_Rate']]
+y = df['Stock_Index_Price']
+
+# Fit Multiple Linear Regression model
+model = LinearRegression()
+model.fit(X, y)
+
+# Predict (optional, just to check)
+y_pred = model.predict(X)
+
+# Plot Stock Index Price vs Interest Rate
+plt.scatter(df['Interest_Rate'], df['Stock_Index_Price'], color='blue')
+plt.xlabel('Interest Rate')
+plt.ylabel('Stock Index Price')
+plt.title('Stock Index Price vs Interest Rate')
+plt.show()
