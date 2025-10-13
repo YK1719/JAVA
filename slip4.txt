@@ -1,56 +1,50 @@
-1] 
-import java.util.Scanner; 
- 
-public class imp4 { 
-    public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
- 
-        System.out.print("Enter your name: "); 
-        String name = sc.nextLine(); 
- 
-        String upperName = name.toUpperCase(); 
- 
-        System.out.println("Hello, " + upperName + ", nice to meet you!"); 
- 
-        sc.close(); 
-    } 
-} 
- 
- 
+# Define two matrices of the same size
+matrix1 <- matrix(c(1,2,3,4,5,6), nrow=2, ncol=3)
+matrix2 <- matrix(c(6,5,4,3,2,1), nrow=2, ncol=3)
+
+# Sum of matrices
+sum_matrix <- matrix1 + matrix2
+
+# Display result
+print(sum_matrix)
 
 
 
-2] 
-import javax.swing.*; 
-import java.awt.*; 
-import java.awt.event.*; 
-public class a4a4 
-{ 
-public static void main(String args[]) 
-{ 
-JFrame f1=new JFrame("ComboBox example"); 
-f1.setTitle("ComboBox example"); 
-f1.setSize(500,400); 
-f1.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); 
-f1.setLayout(null); 
-JLabel l1=new JLabel("programming languages selected:"); 
-l1.setBounds(50,30,300,30); 
-f1.add(l1); 
-String c[]={"C","C++","C#","Java","PHP"}; 
-JComboBox<String> jc=new JComboBox<>(c); 
-jc.setBounds(50,70,100,30); 
-f1.add(jc); 
-JButton b1=new JButton("show"); 
-b1.setBounds(50,120,100,30); 
-f1.add(b1); 
-b1.addActionListener(new ActionListener() 
-{ 
-public void actionPerformed(ActionEvent e) 
-{ 
-String s=(String) jc.getSelectedItem(); 
-l1.setText("programming language selected:"+s); 
-} 
-}); 
-f1.setVisible(true); 
-} 
-}
+
+
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.naive_bayes import GaussianNB
+
+# Dataset
+weather = ['Sunny', 'Sunny', 'Overcast', 'Rainy', 'Rainy', 'Rainy', 'Overcast', 'Sunny', 'Sunny', 'Rainy', 'Sunny', 'Overcast', 'Overcast', 'Rainy']
+temp    = ['Hot', 'Hot', 'Hot', 'Mild', 'Cool', 'Cool', 'Cool', 'Mild', 'Cool', 'Mild', 'Mild', 'Mild', 'Hot', 'Mild']
+play    = ['No', 'No', 'Yes', 'Yes', 'No', 'Yes', 'No', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'Yes', 'No']
+
+# Create DataFrame
+df = pd.DataFrame({'Weather': weather, 'Temp': temp, 'Play': play})
+
+# Encode categorical features
+le_weather = LabelEncoder()
+le_temp = LabelEncoder()
+le_play = LabelEncoder()
+
+df['Weather'] = le_weather.fit_transform(df['Weather'])
+df['Temp'] = le_temp.fit_transform(df['Temp'])
+df['Play'] = le_play.fit_transform(df['Play'])
+
+# Features and target
+X = df[['Weather', 'Temp']]
+y = df['Play']
+
+# Train Gaussian Naive Bayes
+model = GaussianNB()
+model.fit(X, y)
+
+# Predict for tuple: ('Overcast', 'Mild')
+sample = [[le_weather.transform(['Overcast'])[0], le_temp.transform(['Mild'])[0]]]
+prediction = model.predict(sample)
+
+# Decode prediction
+pred_class = le_play.inverse_transform(prediction)
+print("Predicted class for ('Overcast', 'Mild'):", pred_class[0])
