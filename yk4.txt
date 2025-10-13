@@ -1,0 +1,47 @@
+4]  Consider following dataset 
+weather=['Sunny','Sunny','Overcast','Rainy','Rainy','Rainy','Overcast','Sunny','Sunny','Rainy','Sunn 
+y','Overcast','Overcast','Rainy'] temp=['Hot','Hot','Hot','Mild','Cool','Cool','Cool','Mild','Cool','Mild','Mild','Mild','Hot','Mild'] 
+play=['No','No','Yes','Yes','Yes','No','Yes','No','Yes','Yes','Yes','Yes','Yes','No']. Use Naïve Bayes algorithm to predict [0: 
+Overcast, 2: Mild] tuple belongs to which class whether to play the sports or not. 
+ 
+import pandas as pd 
+ 
+data={ 
+    'weather':['sunny','sunny','overcast','rainy','rainy','rainy', 
+               'overcast', 
+               'sunny','sunny','rainy','sunny','overcast', 
+               'overcast','rainy'], 
+    'temp':['hot','hot','hot','mild','cool','cool', 
+            'cool','mild','cool','mild', 
+            'mild','mild','hot','mild'], 
+    'play':['no','no','yes','yes','yes','no', 
+            'yes','yes','yes','yes','yes','yes','no','no'] 
+} 
+data 
+               
+df=pd.DataFrame(data) 
+df 
+x=df['weather'] 
+x 
+y=df['temp'] 
+y 
+z=df['play'] 
+z 
+ 
+from sklearn import preprocessing 
+le=preprocessing.LabelEncoder() 
+weather_encoded=le.fit_transform(x) 
+print("weather:",weather_encoded) 
+temp_encoded=le.fit_transform(y) 
+print("Temp:",temp_encoded) 
+play_encoded=le.fit_transform(z) 
+print("play:",play_encoded) 
+features=list(zip(weather_encoded,temp_encoded)) 
+print(features) 
+from sklearn.naive_bayes import GaussianNB 
+model=GaussianNB() 
+model.fit(features,play_encoded) 
+predicted=model.predict([[2,1]]) 
+print("predicted value:",predicted) 
+predicted=model.predict([[0,1]]) 
+print("predicted value:",predicted)
