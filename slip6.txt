@@ -1,118 +1,46 @@
-1] 
-import java.io.*; 
-import java.util.*; 
-class collection 
-{ 
-public static void main(String args[]) 
-{ 
-TreeSet t1=new TreeSet(); 
-Scanner sc=new Scanner(System.in); 
-System.out.println("enter the value you want"); 
-int n=sc.nextInt(); 
-System.out.println("enter the value\n"); 
-for(int i=0;i<n;i++) 
-{ 
-String str=sc.next(); 
-t1.add(str); 
-} 
-System.out.println(t1); 
-System.out.print("enter the value to search"); 
-String a1=sc.next(); 
-if(t1.contains(a1)) 
-{ 
-System.out.println("the String is present"); 
-} 
-else 
-{ 
-System.out.println("the String is not present"); 
-} 
-} 
-} 
+# Define vectors
+names <- c("Shekhar", "Sagar", "Dipak", "Priyanka", "Shekhar")
+ages  <- c(25, 22, 21, 51, 25)
+
+# Create data frame
+df <- data.frame(names, ages)
+print("Data Frame:")
+print(df)
+
+# Find and display duplicate rows
+duplicate <- df[duplicated(df), ]
+print("Duplicate Elements:")
+print(duplicate)
 
 
 
 
 
-2] 
-import java.io.*; 
-import java.util.*; 
-class emp 
-{ 
-    int id,sal; 
-    String name; 
-    emp() 
-    { 
-        id=1; 
-        sal=9000; 
-        name="nilima"; 
-    } 
-    public void accept() 
-    { 
-        Scanner sc=new Scanner(System.in); 
-        System.out.println("enter the emp id"); 
-        id=sc.nextInt(); 
-        System.out.println("enter the emp salary"); 
-        sal=sc.nextInt(); 
-        System.out.println("enter the emp name"); 
-        name=sc.next(); 
-    } 
-  public void display() 
-    { 
-        System.out.println("the emp id is:"+id); 
-        System.out.println("the emp sal is:"+sal); 
-        System.out.println("the emp name is:"+name); 
-    } 
-} 
-class manager extends emp 
-{ 
-    private int bonus; 
-    manager() 
-    { 
-        bonus=10; 
-    } 
-      public void accept() 
-    { 
-        super.accept(); 
-        Scanner s1=new Scanner(System.in); 
-        System.out.println("enter the emp bonus"); 
-        bonus=s1.nextInt(); 
-    } 
-    public void display() 
-    { 
-        super.display(); 
-        System.out.println("the emp bonus "+bonus); 
-        System.out.println("Total Salary (Salary+Bonus):"+(sal+bonus)); 
-    } 
- public int sal() 
-    { 
-        return sal+bonus; 
-    } 
-} 
-public class a2a3 
-{ 
-        public static void main(String args[]) 
-        { 
-            int n; 
-            Scanner s2=new Scanner(System.in); 
-            System.out.println("how many records do you want"); 
-            n=s2.nextInt(); 
-            manager m[]=new manager[n]; 
-            for(int i=0;i<n;i++) 
-            { 
-            m[i]=new manager(); 
-            m[i].accept(); 
-            } 
-           int max_sal=0; 
-            int temp=0; 
-            for(int i=0;i<n;i++) 
-            { 
-            if(m[i].sal()>max_sal) 
-            { 
-            max_sal=m[i].sal(); 
-            temp=i; 
-            } 
-            } 
-            System.out.println("\nManager with highest total salary:"); 
-            m[temp].display(); 
-        } 
-} 
+
+import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.cluster import AgglomerativeClustering
+from scipy.cluster.hierarchy import dendrogram, linkage
+
+# Load dataset (replace with your path or GitHub raw link)
+data = pd.read_csv("Customer.csv")
+
+# Select numerical columns for clustering
+X = data.iloc[:, 1:].values  # assuming first column is ID/Name
+
+# Create dendrogram
+linked = linkage(X, method='ward')
+plt.figure(figsize=(10, 7))
+dendrogram(linked)
+plt.title("Customer Dendrogram")
+plt.xlabel("Customers")
+plt.ylabel("Euclidean distances")
+plt.show()
+
+# Apply Agglomerative Clustering
+cluster = AgglomerativeClustering(n_clusters=3, affinity='euclidean', linkage='ward')
+y_clusters = cluster.fit_predict(X)
+
+# Add cluster labels to dataset
+data['Cluster'] = y_clusters
+print(data.head())
