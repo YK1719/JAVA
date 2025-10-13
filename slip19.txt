@@ -1,94 +1,39 @@
-1] 
-import java.util.Scanner; 
- 
-public class imp20 { 
-    public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
- 
-        System.out.print("Enter the number of elements: "); 
-        int n = sc.nextInt(); 
- 
-        int[] arr = new int[n]; 
- 
-        // Accept numbers from user 
-        System.out.println("Enter " + n + " numbers:"); 
-        for (int i = 0; i < n; i++) { 
-            arr[i] = sc.nextInt(); 
-        } 
- 
-        // Find maximum number 
-        int max = arr[0]; 
-        for (int i = 1; i < n; i++) { 
-            if (arr[i] > max) { 
-                max = arr[i]; 
-            } 
-        } 
- 
-        System.out.println("Maximum number is: " + max); 
-        sc.close(); 
-    } 
-} 
+# Create the DataFrame
+students <- data.frame(
+  Rollno = c(1, 2, 3, 4, 5),
+  Studname = c("Alice", "Bob", "Charlie", "David", "Eva"),
+  Address = c("Mumbai", "Pune", "Nagpur", "Nashik", "Aurangabad"),
+  Marks = c(85, 90, 78, 88, 92)
+)
+
+# Display the details
+print(students)
 
 
 
 
 
-2] 
-import java.util.Scanner; 
- 
-// Abstract class 
-abstract class Order { 
-    int id; 
-    String description; 
- 
-    // Abstract methods 
-    abstract void accept(); 
-    abstract void display(); 
-} 
- 
-// Subclass 
-class PurchaseOrder extends Order { 
-    String customerName; 
-    Scanner sc = new Scanner(System.in); 
- 
-    // Accept details from user 
-    void accept() { 
-        System.out.print("Enter Order ID: "); 
-        id = sc.nextInt(); 
-        sc.nextLine(); // consume newline 
- 
-        System.out.print("Enter Description: "); 
-        description = sc.nextLine(); 
- 
-        System.out.print("Enter Customer Name: "); 
-        customerName = sc.nextLine(); 
-    } 
- 
-    // Display details 
-    void display() { 
-        System.out.println("Order ID: " + id); 
-        System.out.println("Description: " + description); 
-        System.out.println("Customer Name: " + customerName); 
-        System.out.println("---------------------------"); 
-    } 
-} 
- 
-// Main class 
-public class imp21 { 
-    public static void main(String[] args) { 
-        PurchaseOrder[] orders = new PurchaseOrder[3]; 
- 
-        // Create and accept details for 3 orders 
-        for (int i = 0; i < 3; i++) { 
-            System.out.println("Enter details for Order " + (i + 1) + ":"); 
-            orders[i] = new PurchaseOrder(); 
-            orders[i].accept(); 
-        } 
- 
-        // Display all orders 
-        System.out.println("\nPurchase Order Details:"); 
-        for (int i = 0; i < 3; i++) { 
-            orders[i].display(); 
-        } 
-    } 
-} 
+
+# Import necessary libraries
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+
+# Load dataset
+url = "https://www.w3schools.com/python/ML_data.csv"  # CSV file from W3Schools
+data = pd.read_csv(url)
+
+# Define features and target
+X = data[['Weight', 'Volume']]  # Features
+y = data['CO2']                 # Target
+
+# Create and train the model
+model = LinearRegression()
+model.fit(X, y)
+
+# Print estimated coefficients
+print("Intercept (b0):", model.intercept_)
+print("Coefficients (b1, b2):", model.coef_)
+
+# Make predictions (optional)
+y_pred = model.predict(X)
+print("\nPredicted CO2 values:", y_pred)
