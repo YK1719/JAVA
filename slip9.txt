@@ -1,73 +1,89 @@
-1] 
-import java.io.BufferedReader; 
-import java.io.InputStreamReader; 
-import java.io.IOException; 
-public class imp8 { 
-    public static void main(String[] args) throws IOException { 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in)); 
-        System.out.print("Enter a number: "); 
-        int num = Integer.parseInt(br.readLine()); 
-        int sum = 0; 
-   for (int i = 1; i <= num / 2; i++) { 
-            if (num % i == 0) { 
-                sum += i; 
-            } 
-        } 
-   if (sum == num) { 
-            System.out.println(num + " is a perfect number."); 
-        } else { 
-            System.out.println(num + " is not a perfect number."); 
-        } 
-    } 
-} 
+# Create vectors for employee details
+EmpID <- c(101, 102, 103, 104, 105)
+Name <- c("Shekhar", "Sagar", "Dipak", "Priyanka", "Rahul")
+Dept <- c("IT", "HR", "Finance", "IT", "Marketing")
+Salary <- c(50000, 45000, 60000, 55000, 48000)
 
+# Create data frame
+employees <- data.frame(EmpID, Name, Dept, Salary)
 
+# Display data frame
+print(employees)
 
+# Display summary of the data frame
+summary(employees)
 
+# Initialize the first two Fibonacci numbers
+fib <- numeric(10)
+fib[1] <- 0
+fib[2] <- 1
 
-2] 
-class Point 
-{ 
-int x; 
-int y; 
-public Point(int x,int y) 
-{ 
-this.x=x; 
-this.y=y; 
-} 
-} 
-class ColorPoint extends Point 
-{ 
-String color; 
-public ColorPoint(int x,int y,String color) 
-{ 
-super(x,y); 
-this.color=color; 
-} 
-public void display() 
-{ 
-System.out.println("x: "+x+",y: "+y+",color: "+color); 
-} 
-} 
-class Point3D extends Point 
-{ 
-int z; 
-public Point3D(int x,int y,int z) 
-{ 
-super(x,y); 
-this.z=z; 
-} 
-public void display() 
-{ 
-System.out.println("x: "+x+",y: "+y+",z: "+z); 
-} 
-} 
-public class A2A1 
-{ 
-public static void main(String args[]) 
-{ 
-ColorPoint c1=new ColorPoint(5,6,"blue"); 
-c1.display(); 
-Point3D c2=new Point3D(5,6,7); 
-c2.display();     }       
+# Generate the rest
+for(i in 3:10){
+  fib[i] <- fib[i-1] + fib[i-2]
 }
+
+# Print the Fibonacci sequence
+print(fib)
+
+
+
+
+
+
+import pandas as pd
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+
+# Load dataset
+data = pd.read_csv("CC GENERAL.csv")
+
+# Drop non-numeric columns and fill missing values
+X = data.select_dtypes(include=['float64', 'int64']).fillna(0)
+
+# Apply K-Means
+kmeans = KMeans(n_clusters=3, random_state=42)
+data['Cluster'] = kmeans.fit_predict(X)
+
+# Display first few rows with cluster labels
+print(data.head())
+
+# Visualize clusters using first two features
+plt.scatter(X.iloc[:, 0], X.iloc[:, 1], c=data['Cluster'], cmap='viridis', s=50)
+plt.scatter(kmeans.cluster_centers_[:, 0], kmeans.cluster_centers_[:, 1],
+            color='red', marker='X', s=200)
+plt.title("K-Means Clustering")
+plt.xlabel(X.columns[0])
+plt.ylabel(X.columns[1])
+plt.show()
+
+
+
+
+from sklearn.datasets import load_breast_cancer
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, precision_score, recall_score
+
+# Load dataset
+data = load_breast_cancer()
+X, y = data.data, data.target
+
+# Split dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+
+# Build SVM model
+model = SVC(kernel='linear', random_state=42)
+model.fit(X_train, y_train)
+
+# Predictions
+y_pred = model.predict(X_test)
+
+# Performance metrics
+accuracy = accuracy_score(y_test, y_pred)
+precision = precision_score(y_test, y_pred)
+recall = recall_score(y_test, y_pred)
+
+print("Accuracy:", accuracy)
+print("Precision:", precision)
+print("Recall:", recall)
