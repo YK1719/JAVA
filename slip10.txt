@@ -1,107 +1,42 @@
-1] 
-import java.util.Scanner; 
-public class imp9 { 
-    public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
-        System.out.print("Enter a number: "); 
-        int num = sc.nextInt(); 
-        boolean isPrime = true; 
-        if (num <= 1) { 
-            isPrime = false; 
-        } else { 
-            for (int i = 2; i <= num / 2; i++) { 
-                if (num % i == 0) { 
-                    isPrime = false; 
-                    break; 
-                } 
-            } 
-        } 
-  if (isPrime) { 
-            System.out.println(num + " is a prime number."); 
-        } else { 
-            System.out.println(num + " is not a prime number."); 
-        } sc.close(); 
-    } 
-} 
+# Define a vector
+vec <- c(10, 25, 5, 42, 18, 7)
+
+# Find maximum and minimum
+max_val <- max(vec)
+min_val <- min(vec)
+
+# Display results
+cat("Maximum value:", max_val, "\n")
+cat("Minimum value:", min_val, "\n")
 
 
 
 
 
-2] 
-import java.util.Scanner; 
-class InsufficientFundException extends Exception { 
-    public InsufficientFundException(String message) { 
-        super(message); 
-    } 
-} 
-class SavingAccount { 
-    private int acno; 
-    private String name; 
-    private double balance; 
-    private final double MIN_BALANCE = 500; 
-public SavingAccount(int acno, String name, double balance) { 
-        this.acno = acno; 
-        this.name = name; 
-        this.balance = balance; 
-    } 
-  public void deposit(double amount) { 
-        balance += amount; 
-        System.out.println("Deposited: " + amount); 
-    } 
-public void withdraw(double amount) throws InsufficientFundException { 
-        if (balance - amount < MIN_BALANCE) { 
-            throw new InsufficientFundException("Insufficient funds! Minimum balance of " + MIN_BALANCE + " must be 
-maintained."); 
-        } 
-        balance -= amount; 
-        System.out.println("Withdrawn: " + amount); 
-    } 
-  public void viewBalance() { 
-        System.out.println("Account No: " + acno); 
-        System.out.println("Name: " + name); 
-        System.out.println("Balance: " + balance); 
-    } 
-} 
-public class imp10 { 
-    public static void main(String[] args) { 
-        Scanner sc = new Scanner(System.in); 
- System.out.print("Enter Account No: "); 
-        int acno = sc.nextInt(); 
-        sc.nextLine(); 
-        System.out.print("Enter Name: "); 
-       String name = sc.nextLine(); 
-        System.out.print("Enter Initial Balance: "); 
-        double balance = sc.nextDouble(); 
-  SavingAccount account = new SavingAccount(acno, name, balance); 
-while (true) { 
-            System.out.println("\n1. Deposit\n2. Withdraw\n3. View Balance\n4. Exit"); 
-            System.out.print("Choose an option: "); 
-            int choice = sc.nextInt(); 
-          switch (choice) { 
-                case 1: 
-                    System.out.print("Enter amount to deposit: "); 
-                    double depositAmt = sc.nextDouble(); 
-                    account.deposit(depositAmt); 
-                    break; 
-                case 2: 
-                    System.out.print("Enter amount to withdraw: "); 
-                    double withdrawAmt = sc.nextDouble(); 
-                    try { 
-                        account.withdraw(withdrawAmt); 
-                    } catch (InsufficientFundException e) { 
-                        System.out.println(e.getMessage()); 
-                    } 
-                    break; 
-                case 3: 
-                    account.viewBalance(); 
-                    break; 
-                case 4: 
-                    System.out.println("Exiting..."); 
-                    sc.close(); 
-                    return; 
-                default: 
-                    System.out.println("Invalid choice!"); 
-            } 
-        } 
-    }   }
+import pandas as pd
+from apyori import apriori
+
+# Load dataset
+data = pd.read_csv("Iris.csv")
+
+# Prepare transactions (convert each row to a list of strings)
+records = []
+for i in range(len(data)):
+    records.append([str(data.iloc[i, j]) for j in range(len(data.columns))])
+
+# Apply Apriori algorithm
+association_rules = apriori(records, 
+                            min_support=0.0045, 
+                            min_confidence=0.2, 
+                            min_lift=3, 
+                            min_length=2)
+
+# Convert results to list
+results = list(association_rules)
+
+# Print results
+for item in results:
+    print(item)
+
+# Print total number of rules
+print("Total association rules:", len(results))
