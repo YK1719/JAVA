@@ -1,0 +1,18 @@
+8]  Write a python program to implement k-means algorithm to build prediction model (Use Credit Card Dataset CC 
+GENERAL.csv Download from kaggle.com)  
+import pandas as pd 
+import numpy as np 
+from sklearn.cluster import KMeans 
+from sklearn.preprocessing import StandardScaler 
+df=pd.read_csv("CC GENERAL.csv") 
+df.head() 
+df.fillna(method='ffill',inplace=True) 
+d_f=df.drop('CUST_ID',axis=1) 
+scaler=StandardScaler() 
+df_scaled=scaler.fit_transform(d_f) 
+d_f.head() 
+kmeans=KMeans(n_clusters=4,random_state=42) 
+df['cluster']=kmeans.fit_predict(df_scaled) 
+cluster_centers=kmeans.cluster_centers_ 
+label=kmeans.labels_ 
+cluster_centers
