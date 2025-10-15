@@ -1,0 +1,7 @@
+#include <stdio.h> 
+#include <unistd.h> #include <sys/types.h> 
+int main() {     pid_t pid = fork();   if (pid == 0) {    
+        printf("Child Process ID: %d\n", getpid());         execl("/bin/ls", "ls", NULL);            perror("execl failed");         }      else if (pid > 0) {    
+        printf("Parent going to sleep. PID: %d\n", getpid()); 
+        sleep(5);  }      else {         perror("Fork failed"); } return 0; 
+} 
