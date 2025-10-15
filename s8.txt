@@ -12,3 +12,45 @@
  
  
  
+
+#include <stdio.h>
+
+int main() {
+    int n = 3; // number of frames
+    int frame[3] = {-1, -1, -1};
+    int ref[] = {12,15,12,18,6,8,11,12,19,12,6,8,12,15,19,8};
+    int m = sizeof(ref)/sizeof(ref[0]);
+    int PF = 0;
+
+    for(int i = 0; i < m; i++) {
+        int found = 0;
+        for(int j = 0; j < n; j++)
+            if(frame[j] == ref[i]) found = 1;
+        
+        if(!found) { // page fault
+            PF++;
+            int replace = -1, farthest = -1;
+            
+            // find optimal page to replace
+            for(int j = 0; j < n; j++) {
+                int k;
+                for(k = i+1; k < m; k++)
+                    if(frame[j] == ref[k]) break;
+                if(k > farthest) {
+                    farthest = k;
+                    replace = j;
+                }
+            }
+            frame[replace] = ref[i];
+        }
+
+        // print current frame status
+        printf("\nPage %d: ", ref[i]);
+        for(int j = 0; j < n; j++)
+            if(frame[j] != -1) printf("%d ", frame[j]);
+            else printf("- ");
+    }
+
+    printf("\nTotal Page Faults = %d\n", PF);
+    return 0;
+}
