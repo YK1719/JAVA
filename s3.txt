@@ -1,0 +1,5 @@
+#include <stdio.h> 
+#include <unistd.h> #include <sys/wait.h> 
+int main() {     pid_t pid = fork();   if (pid == 0) {           printf("Child PID: %d\n", getpid());         execl("/bin/ls", "ls", NULL);   // Replace child with 'ls' command         perror("exec failed"); }      else if (pid > 0) {  
+        printf("Parent PID: %d\n", getpid());         wait(NULL);            printf("Control returned to parent after child terminated.\n"); 
+    }  else {         perror("fork failed"); }   return 0;} 
