@@ -1,0 +1,4 @@
+#include <stdio.h> #include <unistd.h> 
+int main() {     pid_t pid = fork(); if (pid == 0)         printf("Child PID: %d, Hello World\n", getpid()); 
+    else if (pid > 0)         printf("Parent PID: %d, Hi\n", getpid()); 
+    else         printf("Fork failed\n");  return 0;} 
