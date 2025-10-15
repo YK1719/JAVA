@@ -1,19 +1,30 @@
 #include <stdio.h>
+
 int main() {
     int i, j, n, temp;
     int at[20], bt[20], ct[20], tat[20], wt[20], proc[20];
     float atat = 0, awt = 0;
-    //int io_wait = 2; 
-  //srand(time(0)); 
- printf("Enter the number of processes: ");
+    //int io_wait = 2; // fixed I/O waiting time
+
+    //srand(time(0)); // for random next CPU burst
+
+    printf("Enter the number of processes: ");
     scanf("%d", &n);
-  for(i = 0; i < n; i++) {
+
+    for(i = 0; i < n; i++) 
+    {
         proc[i] = i + 1;
         printf("Enter first CPU Burst for P[%d]: ", i + 1);
-        scanf("%d", &bt[i])   }
-  for(i = 0; i < n; i++)  {
+        scanf("%d", &bt[i]);
+    }
+
+    for(i = 0; i < n; i++) 
+    {
         printf("Enter Arrival Time for P[%d]: ", i + 1);
-        scanf("%d", &at[i])   }
+        scanf("%d", &at[i]);
+    }
+
+    // Sort by Arrival Time
     for(i = 0; i < n - 1; i++) {
         for(j = i + 1; j < n; j++) {
             if(at[i] > at[j]) {
@@ -29,6 +40,8 @@ int main() {
             }
         }
     }
+
+    // Calculate Completion Time with I/O wait and random next CPU bursts
     ct[0] = at[0] + bt[0];
     for(i = 1; i < n; i++) 
     {
@@ -42,10 +55,15 @@ int main() {
         wt[i] = tat[i] - bt[i];
         atat += tat[i];
         awt += wt[i];
-    } printf("\nGantt Chart:\n|");
+    }
+
+    // Gantt Chart
+    printf("\nGantt Chart:\n|");
     for(i = 0; i < n; i++)
         printf(" P[%d]->%d |", proc[i],ct[i]);
     printf("\n");
+
+    // Display process info
     printf("\nProcess\tBT\tAT\tCT\tTAT\tWT\n");
     for(i = 0; i < n; i++)
         printf("P[%d]\t%d\t%d\t%d\t%d\t%d\n", proc[i], bt[i], at[i], ct[i], tat[i], wt[i]);
@@ -55,7 +73,4 @@ int main() {
 
     return 0;
 }
-
-
-
 
