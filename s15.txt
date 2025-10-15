@@ -5,3 +5,76 @@ int main() {     pid_t pid = fork();   if (pid == 0) {
         printf("Parent going to sleep. PID: %d\n", getpid()); 
         sleep(5);  }      else {         perror("Fork failed"); } return 0; 
 } 
+
+
+
+
+
+
+#include <stdio.h>
+int main() {
+    int n;
+    printf("Enter number of memory frames: ");
+    scanf("%d", &n);
+
+    int frame[n], time[n], ref[] = {7,0,1,2,0,3,0,4,2,3,0,3,2};
+    int m = sizeof(ref)/sizeof(ref[0]);
+    int PF = 0;
+
+    for(int i=0;i<n;i++) 
+    frame[i]=-1, time[i]=-1;
+
+    for(int i=0;i<m;i++) 
+    {
+        int page = ref[i], found=0;
+
+        // check if page is already in frame
+        for(int j=0;j<n;j++) 
+        {
+            if(frame[j]==page) 
+            { 
+                found=1; 
+                time[j]=i; // update last used
+                break; 
+            }
+        }
+
+        if(!found) 
+        { // page fault
+            PF++;
+            int replace=-1;
+
+            // first try to find empty frame
+            for(int j=0;j<n;j++) 
+            {
+                if(frame[j]==-1) 
+                { 
+                replace=j; 
+                break; 
+                }
+            }
+
+            // if no empty frame, find LRU
+            if(replace==-1) 
+            {
+                int lru=0;
+                for(int j=1;j<n;j++)
+                    if(time[j]<time[lru]) lru=j;
+                replace=lru;
+            }
+
+            frame[replace]=page;
+            time[replace]=i;
+        }
+
+        // print frame status
+        printf("\nPage %d: ", page);
+        for(int j=0;j<n;j++)
+            if(frame[j]!=-1) 
+            printf("%d ", frame[j]);
+            else printf("- ");
+    }
+
+    printf("\nTotal Page Faults = %d\n", PF);
+    return 0;
+}
