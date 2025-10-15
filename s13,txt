@@ -8,47 +8,66 @@
 
 
 #include <stdio.h>
-int main() {
+int main() 
+{
     int n=5, m=4, i, j, k, f[5]={0}, ind=0;
     int alloc[5][4] = {{0,0,1,2},{1,0,0,0},{1,3,5,4},{0,6,3,2},{0,0,1,4}};
     int max[5][4]   = {{0,0,1,2},{1,7,5,0},{2,3,5,6},{0,6,5,2},{0,6,5,6}};
     int avail[4]    = {1,5,2,0};
     int need[5][4], ans[5];
+
+    // Calculate Need matrix
     for(i=0;i<n;i++)
         for(j=0;j<m;j++)
             need[i][j] = max[i][j] - alloc[i][j];
-  printf("Need Matrix:\n");
+
+    printf("Need Matrix:\n");
     for(i=0;i<n;i++) {
         for(j=0;j<m;j++) printf("%d ", need[i][j]);
-        printf("\n");    }
+        printf("\n");
+    }
+
+    // Safety Algorithm
     int work[4];
     for(i=0;i<m;i++) 
     work[i]=avail[i];
     int cnt=0;
-    while(cnt<n)  {
+    while(cnt<n) 
+    {
         int found=0;
-        for(i=0;i<n;i++)     {
-            if(f[i]==0)  {
+        for(i=0;i<n;i++) 
+        {
+            if(f[i]==0) 
+            {
                 int flag=1;
                 for(j=0;j<m;j++)
                     if(need[i][j]>work[j]) 
                     flag=0;
-                if(flag)  {
+                if(flag) 
+                {
                     for(k=0;k<m;k++) 
                     work[k]+=alloc[i][k];
                     ans[ind++]=i; 
                     f[i]=1; 
-                    found=1;  }}           }
+                    found=1;
+                }
+            }
+        }
         if(!found) 
         break;
-        cnt++ }
-   if(ind==n) {
+        cnt++;
+    }
+
+    if(ind==n) 
+    {
         printf("\nSystem is in SAFE STATE\nSafe sequence: ");
         for(i=0;i<n;i++) 
         printf("P%d ", ans[i]);
     } else {
-        printf("\nSystem is NOT in safe state\n"); }
- // Request (from P1): {0,4,2,0}
+        printf("\nSystem is NOT in safe state\n");
+    }
+
+    // Request (from P1): {0,4,2,0}
     int req[4]={0,4,2,0}, p=1;
     int grant=1;
     for(i=0;i<m;i++) 
