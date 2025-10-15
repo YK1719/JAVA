@@ -11,33 +11,54 @@ int main() {     pid_t pid = fork();    if (pid == 0) {          nice(-5);  // I
 
 
 
-#include <stdio.h> 
-int main() { 
-    int n = 3;  
-    int ref[] = {3, 4, 5, 6, 3, 4, 7, 3, 4, 5, 6, 7, 2, 4, 6}; 
-    int len = sizeof(ref)/sizeof(ref[0]); 
-      int frames[n]; 
-    for(int i = 0; i < n; i++)  
-    frames[i] = -1;  
-     int page_faults = 0, next = 0; 
-      printf("Page scheduling:\n"); 
-    for(int i = 0; i < len; i++)  { 
-        int found = 0; 
-        for(int j = 0; j < n; j++) { 
-            if(frames[j] == ref[i])  { 
-                found = 1; 
-                break;  }   } 
-        if(!found)  { 
-            frames[next] = ref[i];        
-            next = (next + 1) % n;       
-            page_faults++; } 
+#include <stdio.h>
+int main() 
+{
+    int n = 3; // number of memory frames
+    int ref[] = {3, 4, 5, 6, 3, 4, 7, 3, 4, 5, 6, 7, 2, 4, 6};
+    int len = sizeof(ref)/sizeof(ref[0]);
+    
+    int frames[n];
+    for(int i = 0; i < n; i++) 
+    frames[i] = -1; // initialize frames
+    
+    int page_faults = 0, next = 0;
+    
+    printf("Page scheduling:\n");
+    for(int i = 0; i < len; i++) 
+    {
+        int found = 0;
         for(int j = 0; j < n; j++) 
-            if(frames[j] != -1)  
-            printf("%d ", frames[j]); 
-            else  
-            printf("- "); 
-        printf("\n")   } 
-     
-    printf("Total number of page faults: %d\n", page_faults); 
-    return 0; 
+        {
+            if(frames[j] == ref[i]) 
+            {
+                found = 1;
+                break;
+            }
+        }
+        if(!found) 
+        {
+            frames[next] = ref[i];       // replace using FIFO
+            next = (next + 1) % n;       // move to next frame
+            page_faults++;
+        }
+        for(int j = 0; j < n; j++)
+            if(frames[j] != -1) 
+            printf("%d ", frames[j]);
+            else 
+            printf("- ");
+        printf("\n");
+    }
+    
+    printf("Total number of page faults: %d\n", page_faults);
+    return 0;
 }
+
+
+
+
+
+
+
+
+
