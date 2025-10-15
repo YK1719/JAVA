@@ -1,0 +1,4 @@
+#include <stdio.h> #include <unistd.h> int main() {     pid_t pid = fork();  if (pid == 0) {           sleep(5);    
+        printf("Child (PID %d) becomes orphan, new parent is init.\n", getpid()); 
+    } else if (pid > 0) {  // Parent process         printf("Parent (PID %d) exiting.\n", getpid()); 
+    } else {         printf("Fork failed\n");  }   return 0;} 
